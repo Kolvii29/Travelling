@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Travelling</string>
+
+    <string name="tu_app_de_viajes">Tu App de Viajes</string>
+    <string name="tv_info">¡Hola! Estamos buscando a millones de usuarios con inquietudes y ganas de viajar. Si eres tú? No lo dudes, accede a nuestra App y descubriras miles de destinos y facilidades para alquilar coches, ver el tiempo....</string>
+    <string name="lets_start">Let\'s Start</string>
+
+    <string name="upcoming_meetups" translatable="false">Upcoming Meetups</string>
+    <string name="str_Login" translatable="false">Login</string>
+    <string name="usa_los_angeles_2_weeks" translatable="false">USA, Los Angeles - 2 Weeks</string>
+    <string name="city_of_los_angeles" translatable="false">City of Los Angeles</string>
+    <string name="madives_3_weeks" translatable="false">Madives - 3 Weeks</string>
+    <string name="beach_vacation" translatable="false">Beach Vacation</string>
+
+    <string name="str_btnheart" translatable="false">Likes</string>
+    <string name="str_btncamera" translatable="false">Photos</string>
+    <string name="str_btnlandscape" translatable="false">Places</string>
+    <string name="str_btnface" translatable="false">Profile</string>
+    <string name="str_password" translatable="false">Password</string>
+
+    <string name="forgot_password" translatable="false">Forgot Password?</string>
+    <string name="get_new" translatable="false">Get New</string>
+    <string name="do_you_have_an_account" translatable="false">Do you have an account?</string>
+    <string name="create_new" translatable="false">Create New</string>
+
+    <string name="como_te_llamas">¿Cómo te llamas?</string>
+    <string name="y_tu_apellido">¿Y tu apellido?</string>
+    <string name="cuantos_anos_tienes">¿Cuántos años tienes?</string>
+    <string name="img_camera">Cámara</string>
+    <string name="me_apunto">Me apunto</string>
+    <string name="pol_tica_de_privacidad">Política de Privacidad</string>
+    <string name="ver_condiciones">Ver Condiciones</string>
+    <string name="str_retroceder">Retroceder</string>
+    <string name="login_to_your_account">Login To Your Account</string>
+    <string name="welcome_back">Welcome, I hope you enjoy our App!!!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="login">Login</string>
+    <string name="register_now">Register Now</string>
+    <string name="don_t_have_account">Don\'t Have Account?</string>
+    <string name="or_sign_in_with">Or sign in with</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="selfie">Selfie</string>
+    <string name="full_name">Full name</string>
+    <string name="how_old_are_you">How old are you?</string>
+
+    <string name="hi">Hi</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tokio_school">Tokio School</string>
+    <string name="la_coruna_1_year">La Coruña - 1 Year</string>
+    <string name="end_of_travel">End of travel</string>
+
+</resources>
