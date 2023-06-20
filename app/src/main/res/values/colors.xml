@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_primary">#8692f7</color>
+    <color name="color_primary_variant">#727CD6</color>
     <color name="images">#FF9863</color>
 
     <color name="gris_oscuro">#ABABAB</color>
@@ -12,5 +13,7 @@
 
     <color name="transparente">#2DDEDEDE</color>
     <color name="grey">#d2d2d2</color>
+
+    <color name="lilac">#D29BFD</color>
 
 </resources>

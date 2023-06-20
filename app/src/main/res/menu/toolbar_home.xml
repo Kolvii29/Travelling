@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/castle_nav"
+        android:contentDescription="@string/eurodisney"
+        android:icon="@drawable/ic_castle"
+        android:iconTint="@color/white"
+        android:title="@string/eurodisney"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/car_nav"
+        android:contentDescription="@string/alquilar_coche"
+        android:icon="@drawable/ic_car"
+        android:iconTint="@color/white"
+        android:title="@string/alquilar_coche"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

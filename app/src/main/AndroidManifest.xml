@@ -5,6 +5,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -62,6 +63,9 @@
                 android:name="android.app.lib.name"
                 android:value="" />
         </activity>
+
+
+
     </application>
 
 </manifest>

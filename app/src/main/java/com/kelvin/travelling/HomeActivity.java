@@ -1,36 +1,50 @@
 package com.kelvin.travelling;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class HomeActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
+    MaterialToolbar toolbarHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationHome);
+        bottomNavigationView = findViewById(R.id.bottomNavigationHome);
+        toolbarHome = findViewById(R.id.topBarApp);
+
         bottomNavigationView.setSelectedItemId(R.id.home_Navigation);
+
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home_Navigation) {
                 return true;
             } else if (item.getItemId() == R.id.profile_Navigation) {
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(new Intent(getApplicationContext(), navProfileActivity.class));
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.favorite_Navigation) {
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(new Intent(getApplicationContext(), navFavoriteActivity.class));
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.places_Navigation) {
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(new Intent(getApplicationContext(), navPlacesActivity.class));
                 finish();
                 return true;
@@ -38,8 +52,53 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
+        setSupportActionBar(toolbarHome);
+
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemMenu = item.getItemId();
+        //item.setChecked(true);
+
+        if (itemMenu == R.id.castle_nav) {
+
+            String urlDisney = "https://www.disneylandparis.com/es-es/";
+            Intent goToUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(urlDisney));
+            startActivity(goToUrl);
+
+            return true;
+
+        } else if (itemMenu == R.id.car_nav) {
+
+            replaceFragment(new FragmentLilac());
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void replaceFragment(Fragment fragment){
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayoutLilac, fragment);
+        fragmentTransaction.commit();
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.toolbar_home, menu);
+
+        return true;
+    }
+
+    public void btnNavBack(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
 }
 

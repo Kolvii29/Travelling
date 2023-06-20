@@ -19,12 +19,10 @@ public class navFavoriteActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home_Navigation) {
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.profile_Navigation) {
-                overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_right);
                 startActivity(new Intent(getApplicationContext(), navProfileActivity.class));
                 finish();
                 return true;
@@ -32,7 +30,6 @@ public class navFavoriteActivity extends AppCompatActivity {
 
                 return true;
             } else if (item.getItemId() == R.id.places_Navigation) {
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 startActivity(new Intent(getApplicationContext(), navPlacesActivity.class));
                 finish();
                 return true;

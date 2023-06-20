@@ -51,5 +51,11 @@
     <string name="tokio_school">Tokio School</string>
     <string name="la_coruna_1_year">La Coruña - 1 Year</string>
     <string name="end_of_travel">End of travel</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="favorite">Favorite</string>
+    <string name="places">Places</string>
+    <string name="eurodisney">EuroDisney</string>
+    <string name="alquilar_coche">Alquilar Coche</string>
 
 </resources>
