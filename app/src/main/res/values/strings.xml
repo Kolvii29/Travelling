@@ -57,5 +57,6 @@
     <string name="places">Places</string>
     <string name="eurodisney">EuroDisney</string>
     <string name="alquilar_coche">Alquilar Coche</string>
+    <string name="welcome_message">¡Hi, %s!</string>
 
 </resources>

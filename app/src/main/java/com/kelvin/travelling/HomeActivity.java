@@ -3,9 +3,11 @@ package com.kelvin.travelling;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     MaterialToolbar toolbarHome;
+    TextView tvHiUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationHome);
         toolbarHome = findViewById(R.id.topBarApp);
+        tvHiUser = findViewById(R.id.tv_hi_user);
 
         bottomNavigationView.setSelectedItemId(R.id.home_Navigation);
 
@@ -51,6 +55,20 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        String username = getIntent().getStringExtra("username");
+        String email = getIntent().getStringExtra("email");
+        String password = getIntent().getStringExtra("password");
+
+        Log.d("HomeActivity", "Username: " + username);
+        Log.d("HomeActivity", "Email: " + email);
+        Log.d("HomeActivity", "Password: " + password);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String welcomeMsg = getString(R.string.welcome_message, username);
+            tvHiUser.setText(welcomeMsg);
+        }
 
         setSupportActionBar(toolbarHome);
 
@@ -80,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

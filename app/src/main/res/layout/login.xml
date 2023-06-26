@@ -100,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/bg_inputs"
+                android:padding="10dp"
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -131,6 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/bg_inputs"
+                android:padding="10dp"
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -183,6 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:background="@drawable/bg_buttons"
+            android:enabled="true"
             android:onClick="btnLogin"
             android:paddingHorizontal="50dp"
             android:paddingVertical="15dp"
@@ -304,7 +307,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/tv_DontHaveAccount"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

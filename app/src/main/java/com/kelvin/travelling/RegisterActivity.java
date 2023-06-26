@@ -9,16 +9,18 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.kelvin.travelling.database.DataBaseHelper;
 
 public class RegisterActivity extends Activity {
 
@@ -26,12 +28,13 @@ public class RegisterActivity extends Activity {
     private TextInputLayout mainInputName;
     private TextInputLayout mainInputEmail;
     private TextInputLayout mainInputPass;
-
     private TextInputLayout mainInputAges;
     private Button btn_letsStart;
     private AutoCompleteTextView completeInputAges;
     private String termsPrivacy;
-    private TextView btn_seeConditions;
+    TextInputEditText username, email, password;
+    DataBaseHelper DB;
+
 
     @Override
 
@@ -40,6 +43,7 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.register);
 
         ConstraintLayout clickToCamera = findViewById(R.id.constr_clickCamera);
+        TextView btn_seeConditions = findViewById(R.id.tv_verCondiciones);
         photo_user = findViewById(R.id.picProfile);
         mainInputName = findViewById(R.id.main_input_name);
         mainInputEmail = findViewById(R.id.main_input_email);
@@ -47,10 +51,11 @@ public class RegisterActivity extends Activity {
         mainInputAges = findViewById(R.id.main_input_age);
         btn_letsStart = findViewById(R.id.btn_letsStart);
         completeInputAges = findViewById(R.id.second_input_age);
-        btn_seeConditions = findViewById(R.id.tv_verCondiciones);
         btn_letsStart = findViewById(R.id.btn_letsStart);
-
-
+        username = findViewById(R.id.second_input_name);
+        email = findViewById(R.id.second_input_email);
+        password = findViewById(R.id.second_input_password);
+        DB = new DataBaseHelper(this);
 
         mainInputName.getEditText().addTextChangedListener(textWatcherInputs);
         mainInputEmail.getEditText().addTextChangedListener(textWatcherInputs);
@@ -60,25 +65,61 @@ public class RegisterActivity extends Activity {
         btn_InputAges();
 
         termsPrivacy = "https://developers.google.com/ml-kit/terms";
-        btn_seeConditions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri termsAndPrivacy = Uri.parse(termsPrivacy);
-                Intent clickTvSeeTerms = new Intent(Intent.ACTION_VIEW, termsAndPrivacy);
-                startActivity(clickTvSeeTerms);
-            }
+        btn_seeConditions.setOnClickListener(v -> {
+            Uri termsAndPrivacy = Uri.parse(termsPrivacy);
+            Intent clickTvSeeTerms = new Intent(Intent.ACTION_VIEW, termsAndPrivacy);
+            startActivity(clickTvSeeTerms);
         });
-        clickToCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent cameraPic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraPic, 1);
-            }
+        clickToCamera.setOnClickListener(v -> {
+            Intent cameraPic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraPic, 1);
         });
-
+        btn_letsStart.setOnClickListener(v -> registerUser());
 
     }
 
+    public void registerUser() {
+        String userUsername = username.getText().toString();
+        String userEmail = email.getText().toString();
+        String pass = password.getText().toString();
+
+        if (!isInputEmpty(mainInputName)) {
+            mainInputName.setError("Fill in the field.");
+            btn_letsStart.setEnabled(false);
+        } else if (!isInputEmpty(mainInputEmail)) {
+            mainInputEmail.setError("Fill in the field.");
+            btn_letsStart.setEnabled(false);
+        } else if (!isInputEmpty(mainInputPass)) {
+            mainInputPass.setError("Fill in the field.");
+            btn_letsStart.setEnabled(false);
+        } else {
+            mainInputName.setError(null);
+            mainInputEmail.setError(null);
+            mainInputPass.setError(null);
+
+            boolean userNameExists = DB.checkUsername(userUsername);
+
+            if (userNameExists) {
+                btn_letsStart.setEnabled(false);
+                Toast.makeText(this, "The user name is already in use.", Toast.LENGTH_SHORT).show();
+            } else {
+                boolean isInserted = DB.insertData(userUsername, userEmail, pass);
+
+                if (isInserted) {
+                    btn_letsStart.setEnabled(true);
+                    Toast.makeText(this, "Successful Registration.", Toast.LENGTH_SHORT).show();
+
+                    Intent goToLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                    goToLogin.putExtra("username", userUsername);
+                    startActivity(goToLogin);
+                    finish();
+
+                } else {
+                    Toast.makeText(this, "Error registering the user", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -107,18 +148,16 @@ public class RegisterActivity extends Activity {
             boolean isInputNameValid = isInputEmpty(mainInputName);
             boolean containInvalidChars = InvalidCharacters(mainInputName);
 
-            if (!isInputNameValid){
-                mainInputName.setError("Rellena el campo");
+            if (!isInputNameValid) {
+                mainInputName.setError("Fill in the field");
                 btn_letsStart.setEnabled(false);
             } else if (containInvalidChars) {
-                mainInputName.setError("Ups, no creo que sea correcto, revísalo");
+                mainInputName.setError("Oops, I don't think that's right, check it.");
                 btn_letsStart.setEnabled(false);
             } else {
                 mainInputName.setError(null);
                 btn_letsStart.setEnabled(isInputEmpty);
             }
-
-
         }
 
         @Override
@@ -150,16 +189,10 @@ public class RegisterActivity extends Activity {
             } else if (selectedAge.equals("18-99")) {
                 mainInputAges.setError(null);
             } else {
-                mainInputName.setError("Rellena el campo");
+                mainInputName.setError("Fill in the field");
                 btn_letsStart.setEnabled(false);
             }
         });
-    }
-
-    public void btnLogin(View view) {
-        Intent buttonLogin = new Intent(this, HomeActivity.class);
-        startActivity(buttonLogin);
-        finish();
     }
 
 }
