@@ -5,15 +5,12 @@
     <color name="color_primary">#8692f7</color>
     <color name="color_primary_variant">#727CD6</color>
     <color name="images">#FF9863</color>
-
     <color name="gris_oscuro">#ABABAB</color>
     <color name="celeste_oscuro">#236371</color>
-
     <color name="gris_azulado">#E4EFFF</color>
-
     <color name="transparente">#2DDEDEDE</color>
     <color name="grey">#d2d2d2</color>
-
     <color name="lilac">#D29BFD</color>
+    <color name="red">#C31306</color>
 
 </resources>

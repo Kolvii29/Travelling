@@ -20,6 +20,7 @@ public class OnBoardingActivity extends AppCompatActivity {
         Button btn_start = findViewById(R.id.btn_start);
 
         btn_start.setOnClickListener(v -> {
+
             Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
             startActivity(intent);
         });

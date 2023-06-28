@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -35,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
         tvHiUser = findViewById(R.id.tv_hi_user);
 
         bottomNavigationView.setSelectedItemId(R.id.home_Navigation);
-
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.home_Navigation) {
@@ -56,21 +56,26 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
+        setSupportActionBar(toolbarHome);
+        toolbarHome.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent btn_back = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(btn_back);
+            }
+        });
+
         String username = getIntent().getStringExtra("username");
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
 
+        String message = "Email: " + email + "\nPassword: " + password;
+        Snackbar snackbar = Snackbar.make(bottomNavigationView, message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
+
         Log.d("HomeActivity", "Username: " + username);
         Log.d("HomeActivity", "Email: " + email);
         Log.d("HomeActivity", "Password: " + password);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String welcomeMsg = getString(R.string.welcome_message, username);
-            tvHiUser.setText(welcomeMsg);
-        }
-
-        setSupportActionBar(toolbarHome);
 
     }
 
@@ -78,7 +83,6 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int itemMenu = item.getItemId();
-        //item.setChecked(true);
 
         if (itemMenu == R.id.castle_nav) {
 
@@ -111,11 +115,6 @@ public class HomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_home, menu);
 
         return true;
-    }
-
-    public void btnNavBack(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 
 }

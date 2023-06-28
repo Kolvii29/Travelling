@@ -46,7 +46,7 @@
     <string name="full_name">Full name</string>
     <string name="how_old_are_you">How old are you?</string>
 
-    <string name="hi">Hi</string>
+    <string name="hi">Hi user!!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tokio_school">Tokio School</string>
     <string name="la_coruna_1_year">La Coruña - 1 Year</string>
@@ -57,6 +57,11 @@
     <string name="places">Places</string>
     <string name="eurodisney">EuroDisney</string>
     <string name="alquilar_coche">Alquilar Coche</string>
+
     <string name="welcome_message">¡Hi, %s!</string>
+    <string name="login_error">Login Error.</string>
+    <string name="verify_login_data">Verify login data :(</string>
+    <string name="Okay">OK</string>
+
 
 </resources>

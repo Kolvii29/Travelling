@@ -1,10 +1,14 @@
 package com.kelvin.travelling;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +23,7 @@ public class LoginActivity extends Activity {
 
     private TextInputLayout mainInputEmail;
     private TextInputLayout mainInputPass;
-    private Button btn_login;
+    private Button btn_login, ok_btn;
     String username;
     TextInputEditText email;
     TextInputEditText password;
@@ -57,11 +61,11 @@ public class LoginActivity extends Activity {
 
         if (isInputEmpty(mainInputEmail)) {
             mainInputEmail.setError("Fill in the field");
-            btn_login.setEnabled(false);
         } else if (isInputEmpty(mainInputPass)) {
             mainInputPass.setError("Fill in the field");
-            btn_login.setEnabled(false);
         } else {
+            mainInputEmail.setError(null);
+            mainInputPass.setError(null);
             boolean result = DB.checkUsernamePassword(userEmail, pass);
 
             if (result) {
@@ -74,7 +78,19 @@ public class LoginActivity extends Activity {
                 startActivity(goToHome);
                 finish();
             } else {
-                Toast.makeText(this, "Incorrect credentials.", Toast.LENGTH_SHORT).show();
+
+                View alertCustomDialog = LayoutInflater.from(LoginActivity.this).inflate(R.layout.custom_dialog, null);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
+
+                alertDialog.setView(alertCustomDialog);
+                ok_btn = alertCustomDialog.findViewById(R.id.btn_Okay);
+
+                final AlertDialog dialog = alertDialog.create();
+
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+
+                ok_btn.setOnClickListener(v -> dialog.cancel());
             }
         }
     }
